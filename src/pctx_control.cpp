@@ -26,10 +26,19 @@
 
 pctx_control::Control controlMsg;
 Controller pctxController;
+
+// Send control signal through the USB PCTX device to all the channels
 void sendPCTXControl(const pctx_control::Control& msg)
 {
-  ROS_INFO("PTCX Control forwarding request to: [%d %d]", msg.channel,msg.value);
-  pctxController.updateChannel(msg.channel, msg.value);
+    for(std::vector<int16_t>::const_iterator it = msg.values.begin(); it != msg.values.end(); ++it)
+    {
+        std::cout <<*it <<" ";
+    }
+    std::cout <<"\n";
+    if(msg.values.size() == 9)
+    {
+        pctxController.transmit(msg.values[0],msg.values[1],msg.values[2],msg.values[3],msg.values[4],msg.values[5],msg.values[6],msg.values[7],msg.values[8]);
+    }
 }
 
 int main(int argc, char **argv)

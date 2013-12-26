@@ -157,53 +157,32 @@ bool Controller::transmit(int channel1, int channel2, int channel3, int channel4
 bool Controller::transmit(int channel1,int mul1, int channel2,int mul2, int channel3,int mul3, int channel4, int mul4, int channel5, int mul5,
 						int channel6,int mul6, int channel7,int mul7, int channel8, int mul8, int channel9, int mul9)
 {
-	output[0] = 0;  //do not remove, must be 0
-	output[1] = channel1; //ch1
-	output[2] = mul1; 
-	output[3] = channel2; //ch2
-	output[4] = mul2; 
-	output[5] = channel3; //ch3
-	output[6] = mul3;
-	output[7] = channel4; //ch4
-	output[8] = mul4;
-	output[9] = channel5; //ch5
-	output[10] = mul5;
-	output[11] = channel6; //ch6
-	output[12] = mul6;
-	output[13] = channel7; //ch7
-	output[14] = mul7;
-	output[15] = channel8; //ch8
-	output[16] = mul8;
-	output[17] = channel9; //ch9
-	output[18] = mul9;
-	/*
-	output[0] = channel1%256;
-	output[1] = channel1/256;
-	output[2] = channel2%256;
-	output[3] = channel2/256;
-	output[4] = channel3%256;
-	output[5] = channel3/256;
-	output[6] = channel4%256;
-	output[7] = channel4/256;
-	output[8] = channel5%256;
-	output[9] = channel5/256;
-	output[10] = channel6%256;
-	output[11] = channel6/256;
-	output[12] = channel7%256;
-	output[13] = channel7/256;
-	output[14] = channel8%256;
-	output[15] = channel8/256;
-	output[16] = channel9%256;
-	output[17] = channel9/256;
-	*/
+    output[0] = channel1; //ch1
+    output[1] = mul1;
+    output[2] = channel2; //ch2
+    output[3] = mul2;
+    output[4] = channel3; //ch3
+    output[5] = mul3;
+    output[6] = channel4; //ch4
+    output[7] = mul4;
+    output[8] = channel5; //ch5
+    output[9] = mul5;
+    output[10] = channel6; //ch6
+    output[11] = mul6;
+    output[12] = channel7; //ch7
+    output[13] = mul7;
+    output[14] = channel8; //ch8
+    output[15] = mul8;
+    output[16] = channel9; //ch9
+    output[17] = mul9;
 	return writeToDevice();
 }
 
 // Update data on a single channel and send to the PCTx
 bool Controller::updateChannel(int channelNum, int value)
 {
-	int refIndex = (channelNum - 1) * 2;
-	output[refIndex] = value%256;
+    int refIndex         = (channelNum - 1) * 2;
+    output[refIndex]     = value%256;
 	output[refIndex + 1] = value/256;
 	return writeToDevice();
 }
@@ -232,7 +211,6 @@ bool Controller::writeToDevice(void)
 		#endif
 		return false;
 	}
-
 	return true;
 }
 
