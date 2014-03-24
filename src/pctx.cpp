@@ -203,7 +203,7 @@ bool Controller::writeToDevice(void)
 	}
 
 	libusb_interrupt_transfer(usb_device_handle, 0x81, input, 10, &transferred, TRANSFER_TIMEOUT);
-    //cout << "Read size:"<<transferred<<"\n";
+    cout << "Read size:"<<transferred<<"\n";
 	if (transferred < 10)
 	{
 		#ifdef DEBUG
