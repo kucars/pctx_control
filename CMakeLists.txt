@@ -9,6 +9,7 @@ find_package(catkin REQUIRED COMPONENTS
   rospy
   std_msgs
   message_generation
+  dynamic_reconfigure
 )
 
 ## System dependencies are found with CMake's conventions
@@ -51,7 +52,10 @@ pkg_check_modules(LIBUSB REQUIRED libusb-1.0)
    FILES
    Control.msg
  )
+generate_dynamic_reconfigure_options(
+  cfg/comm_dyn.cfg
 
+)
 ## Generate services in the 'srv' folder
 # add_service_files(
 #   FILES
@@ -109,6 +113,7 @@ include_directories(
 
 ## Declare a cpp executable
 add_executable(pctx_control src/pctx_control.cpp src/pctx.cpp)
+add_executable(command src/command.cpp)
 
 ## Add cmake target dependencies of the executable/library
 ## as an example, message headers may need to be generated before nodes
@@ -119,7 +124,10 @@ target_link_libraries(pctx_control
   ${LIBUSB_LIBRARIES}
   ${catkin_LIBRARIES}
 )
-
+target_link_libraries(command
+  ${LIBUSB_LIBRARIES}
+  ${catkin_LIBRARIES}
+)
 #############
 ## Install ##
 #############

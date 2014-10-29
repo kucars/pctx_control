@@ -37,6 +37,7 @@ void sendPCTXControl(const pctx_control::Control& msg)
     std::cout <<"\n";
     if(msg.values.size() == 9)
     {
+        std::cout << "msg.valuse[0]= "<< msg.values[0] << std::endl ;
         pctxController.transmit(msg.values[0],msg.values[1],msg.values[2],msg.values[3],msg.values[4],msg.values[5],msg.values[6],msg.values[7],msg.values[8]);
     }
 }
